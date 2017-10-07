@@ -1,0 +1,24 @@
+{
+	"compilerOptions": {
+		"module": "commonjs",
+    "target": "es5",
+    "jsx": "react",
+		"moduleResolution": "node",
+		"sourceMap": true,
+    "outDir": "dist",
+    "allowJs": true,
+		"lib": [
+			"es6",
+			"dom"
+		],
+		"strictNullChecks": false,
+		"pretty": true,
+		"rootDir": ".",
+		"forceConsistentCasingInFileNames": true
+	},
+	"exclude": [
+		"node_modules",
+		"node_modules/**",
+		"dist"
+	]
+}
