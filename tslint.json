@@ -1,0 +1,24 @@
+{
+  "defaultSeverity": "error",
+  "extends": [
+      "tslint:recommended",
+      "tslint-react"
+  ],
+  "jsRules": {},
+  "rules": {
+      "no-require-imports": [false],
+      "no-var-requires": false,
+      "object-literal-sort-keys": false,
+      "jsx-alignment": true,
+      "quotemark": [true, "single"],
+      "semicolon": [false],
+      "trailing-comma": [false],
+      "ordered-imports": false,
+      "member-ordering": [true, { "order": "fields-first" }],
+      "variable-name": false,
+      "interface-name": ["never-prefix"],
+      "no-reference-import": false,
+      "interface-over-type-literal": false
+  },
+  "rulesDirectory": []
+}

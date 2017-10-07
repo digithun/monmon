@@ -1,33 +1,30 @@
-import { GQC } from 'graphql-compose'
 import {
   makeExecutableSchema,
   mergeSchemas,
 } from 'graphql-tools';
+import createSchemaFromCompose from './compose-schema'
 
-GQC.rootQuery().addFields({
-  gqlCompose: {
-    type: 'String',
-    resolve: () => 'Hi from gqlCompose'
-  }
-})
+const packageInfo = require('../package.json')
 
-const extraSchema = makeExecutableSchema({
+const verionInfoSchema = makeExecutableSchema({
   typeDefs: `
     type Query {
-      gqlTools: String
+      version: String
     }
   `,
   resolvers: {
     Query: {
-      gqlTools: () => 'Hi from gqlTools'
+      version: () => packageInfo.version
     }
   }
 })
-const schemas = [(extraSchema as any), (GQC.buildSchema() as any)]
-export default function createGraphQLSchema(models: { [modelName: string]: any}) {
+
+export default function createGraphQLSchema(models: ApplicationModels) {
+  const graphqlComposeSchema = createSchemaFromCompose(models)
+  const schemas = [verionInfoSchema, graphqlComposeSchema ]
   return mergeSchemas({
     schemas,
-    resolvers: mergeInfo => ({
+    resolvers: (mergeInfo) => ({
 
     })
   })

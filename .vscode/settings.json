@@ -1,7 +1,11 @@
 // Place your settings in this file to overwrite default and user settings.
 // Exclude js output from typescript
+
 {
+  "typescript.validate.enable": true,
+  "tslint.autoFixOnSave": true,
   "files.exclude": {
+      "**/node_modules": true,
       "**/.git": true,
       "**/.svn": true,
       "**/.hg": true,

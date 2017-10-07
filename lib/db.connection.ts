@@ -1,19 +1,25 @@
 
 import * as mongoose from 'mongoose'
+declare global {
+  interface DBConnectionContext {
+    logger: ApplicationLogger
+    config: ApplicationConfig
+  }
+}
 
-// mongoose.Promise = global.Promise
-export async function initConnection(context: ApplicationContext): Promise<mongoose.Connection> {
+export async function initConnection(context: DBConnectionContext ): Promise<mongoose.Connection> {
   return new Promise<mongoose.Connection>(async (resolve, reject) => {
-    const connection = mongoose.createConnection(context.config.MONGODB_URI, {
-      // useMongoClient: true,
+    const __connection: any = mongoose.createConnection(context.config.MONGODB_URI, {
       promiseLibrary: global.Promise
     })
-    connection.on('disconnected', function() {
-      context.logger.log(`👊🏽  Disconnecte => ${context.config.MONGODB_URI}`)
+
+    __connection.on('disconnected', () => {
+      context.logger.log(`👊🏽  Disconnected => ${context.config.MONGODB_URI}`)
     })
-    connection.on('connected', function () {
+
+    __connection.on('connected', () => {
       context.logger.log(`🖥  Connected => ${context.config.MONGODB_URI} `)
-      resolve(connection)
+      resolve(__connection)
     })
   })
 }
