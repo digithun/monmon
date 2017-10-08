@@ -1,29 +1,14 @@
-require('dotenv').config({})
-const chalk = require('chalk')
-
-function requiredEnv(name: any) {
-  if (process.env[name]) {
-    return process.env[name]
-  } else {
-    throw new Error(`Environment variables not defined (${name})`)
-  }
-}
-function optionalEnvWithDefault(name: any, defaultValue: any) {
-
-  if (process.env[name]) {
-    return process.env[name]
-  } else {
-    console.log(chalk.yellow(`${name} not defined use ${defaultValue}`))
-    return defaultValue
-  }
-}
+import { requiredEnv, optionalEnvWithDefault } from './lib/utils'
 declare global {
   interface ApplicationConfig {
-    MONGODB_URI: string,
+    dev: boolean
+    MONGODB_URI: string
     PORT: string
   }
 }
+
 const config: ApplicationConfig = {
+  dev: optionalEnvWithDefault('NODE_ENV', 'development'),
   MONGODB_URI: requiredEnv('MONGODB_URI'),
   PORT: optionalEnvWithDefault('PORT', 3000)
 }

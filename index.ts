@@ -1,42 +1,40 @@
-import * as express from 'express'
-import * as bodyParser from 'body-parser'
-import * as chalk from 'chalk'
+require('dotenv').config({})
+import config from './config'
+import initApp from './server'
 import { Connection, Model } from 'mongoose'
-import { graphiqlExpress, graphqlExpress } from 'apollo-server-express'
-import graphqlBuildedSchema from '../graphql'
-declare global {
-  interface ApplicationLogger {
-    log: (message: string) => void
-  }
-  interface ApplicationContext {
-    config: ApplicationConfig
-    logger: ApplicationLogger
-    models: ApplicationModels
-  }
+import * as Models from './models'
+import * as chalk from 'chalk'
+import * as DBConnection from './lib/db.connection'
 
-  interface GraphqlContext extends ApplicationContext, express.Request {
 
+const logger = {
+  log: (message) => {
+    console.log(message)
   }
 }
 
-export default async function init(context: ApplicationContext) {
-  const server = express()
-  server.use(bodyParser.json())
-  server.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }))
-  server.use('/graphql', graphqlExpress( (req) => ({
-    schema: graphqlBuildedSchema(context.models),
-    context: {
-      ...req,
-      ...context
-    }
-  })))
-
-  return {
-    start: async () => {
-      server.listen(context.config.PORT, () => {
-        context.logger.log(chalk.bgGreen(`Start application !!`))
-        context.logger.log(chalk.green(`Application start on port =>> ${context.config.PORT}`))
-      })
-    }
+async function run() {
+  const __connection: Connection = await DBConnection.initConnection({
+    logger,
+    config
+  })
+  const models = await Models.createModelsFromMongooseConnection(__connection)
+  const applicationContext: ApplicationContext = {
+    config,
+    logger,
+    models
   }
+  const app = await initApp(applicationContext)
+
+  async function clearConnection() {
+    logger.log(chalk.green('closing app...'))
+    await __connection.close()
+    process.exit(0)
+  }
+  process.on('SIGTERM', clearConnection)
+  process.on('SIGINT', clearConnection)
+
+  app.start()
 }
+
+run()

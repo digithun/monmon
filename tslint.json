@@ -10,6 +10,7 @@
       "no-var-requires": false,
       "object-literal-sort-keys": false,
       "jsx-alignment": true,
+      "no-console": false,
       "quotemark": [true, "single"],
       "semicolon": [false],
       "trailing-comma": [false],

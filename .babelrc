@@ -1,0 +1,40 @@
+{
+  "env": {
+    "development": {
+      "presets": [
+        "next/babel"
+      ],
+      "plugins": [
+        "transform-decorators-legacy",
+        ["styled-components", { "ssr": true }],
+        "transform-function-bind"
+      ]
+    },
+    "production": {
+      "presets": [
+        "next/babel"
+      ],
+      "plugins": [
+        "transform-decorators-legacy",
+        ["styled-components", { "ssr": true }],
+        "transform-function-bind"
+      ]
+    },
+    "test": {
+      "presets": [
+        [
+          "env",
+          {
+            "modules": "commonjs"
+          }
+        ],
+        "next/babel"
+      ],
+      "plugins": [
+        "transform-decorators-legacy",
+        ["styled-components", { "ssr": true }],
+        "transform-function-bind"
+      ]
+    }
+  }
+}

@@ -17,6 +17,10 @@ export async function initConnection(context: DBConnectionContext ): Promise<mon
       context.logger.log(`👊🏽  Disconnected => ${context.config.MONGODB_URI}`)
     })
 
+    __connection.on('reconnect', () => {
+      context.logger.log(`😧  Reconnect to => ${context.config.MONGODB_URI}`)
+    })
+
     __connection.on('connected', () => {
       context.logger.log(`🖥  Connected => ${context.config.MONGODB_URI} `)
       resolve(__connection)
