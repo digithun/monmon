@@ -5,8 +5,8 @@ import schema from './comment.schema'
 
 export default {
   schema,
-  createTypeComposer: (CommentModel: Model<IComment>): TypeComposer => {
+  createTypeComposer: (CommentModel): TypeComposer => {
     const typeComposer = composeWithMongoose(CommentModel) as TypeComposer
     return typeComposer
   }
-}
+} as ApplicationGraphqlStrategy<IComment>

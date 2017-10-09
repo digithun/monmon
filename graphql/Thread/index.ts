@@ -7,12 +7,12 @@ import schema from './thread.schema'
 
 export default {
   schema,
-  createTypeComposer: (ThreadModel: Model<IThread>): TypeComposer => {
+  createTypeComposer: (ThreadModel): TypeComposer => {
     const typeComposer = composeWithMongoose(ThreadModel) as TypeComposer
     enchanceCreate(typeComposer)
     return typeComposer
   },
-  addRelation: (typeComposers) => {
-
+  createGraphQLRelation: (typeComposers) => {
+    // implement Relation
   }
-}
+} as ApplicationGraphqlStrategy<IThread>

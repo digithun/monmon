@@ -5,10 +5,13 @@ import thread from './Thread'
 import comment from './Comment'
 
 declare global {
+  /**
+   * Every Graphql-compose Model strategy should implement this type
+   */
   interface ApplicationGraphqlStrategy<T extends mongoose.Document> {
     schema: mongoose.Schema
     createTypeComposer: (Model: mongoose.Model<T>) => TypeComposer
-    createGraphQLRelation: (TypeComposers: TypeComposer[]) => void
+    createGraphQLRelation?: (TypeComposers: TypeComposer[]) => void
   }
   /**
    * dont foret to add models to Interface
