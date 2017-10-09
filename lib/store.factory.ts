@@ -29,6 +29,8 @@ export default function(config: ApplicationClientStoreConfig) {
   }
 
   const rootReducer = combineReducers<ApplicationState>(reducers)
+  console.log('Create redux store')
+  console.log(config.initialState)
   __store = createStore<ApplicationState>(rootReducer, config.initialState, middlewares)
   sagaMiddleware.run(initialSagas({
     apolloClient: config.apolloClient,

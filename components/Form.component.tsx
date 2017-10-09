@@ -1,14 +1,31 @@
 import * as React from 'react'
+import { withProps } from 'recompose'
+
+const InputField = withProps<{ onChange: any, value: any}, { value: string, fieldName: string, onChange: (fieldName: string, value: string) => void }>(
+  (props) => ({
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+      props.onChange(props.fieldName, e.target.value)
+    },
+    value: props.value
+  })
+)(({ onChange, value }) => React.createElement('input', { value, onChange}))
 
 interface FormPropTypes {
-  value: string
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  value: UserProfile
+  loading: boolean;
+  onChange: (fieldName: string, value: string) => void
 }
 export default class Form extends React.Component<FormPropTypes, {}> {
   public render() {
-    const {value, onChange} = this.props
+    console.log('render component')
+    const { value, onChange } = this.props
     return (
-      <input value={value} onChange={onChange} />
+      <div>
+        {'firstName' + value.firstName}
+        {this.props.loading ? 'loading' : 'done'}
+        {<InputField value={value.firstName} fieldName={'firstName'} onChange={this.props.onChange} />}
+        {<InputField value={value.lastName} fieldName={'firstName'} onChange={this.props.onChange} />}
+      </div>
     )
   }
 }

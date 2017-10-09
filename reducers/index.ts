@@ -9,8 +9,9 @@ declare global {
     global: GlobalState
   }
 }
-const globalReducer: Reducer<GlobalState> = (state, action) => {
-
+const globalReducer: Reducer<GlobalState> = (prevState, action) => {
+  const state = Object.assign({}, prevState)
+  console.log('global state', state)
   switch (action.type) {
     case 'global/loading-start':
       return {
@@ -22,6 +23,11 @@ const globalReducer: Reducer<GlobalState> = (state, action) => {
         ...state,
         loading: false
       }
+    case 'form/update':
+    return {
+      ...state,
+      loading: !state.loading
+    }
     default: {
       return {
         ...state

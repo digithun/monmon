@@ -6,13 +6,23 @@ import createSchemaFromCompose from './compose-schema'
 
 const packageInfo = require('../package.json')
 
-const somedata = {
+// Define global Models
+declare global {
+  interface UserProfile {
+    _id: string
+    firstName: string
+    lastName: string
+  }
+}
+const profileData: UserProfile = {
+  _id: 'mock/id',
   firstName: 'John',
   lastName: 'BananaSeed'
 }
 const simpleSchema = makeExecutableSchema({
   typeDefs: `
     type Profile {
+      _id: String
       firstName: String
       lastName: String
     }
@@ -38,17 +48,17 @@ const simpleSchema = makeExecutableSchema({
   `,
   resolvers: {
     Mutation: {
-      updateProfile: (source, args) => {
-        somedata.firstName = args.record.firstName
-        somedata.lastName = args.record.lastName
+      updateProfile: (source, args: { record: UserProfile }) => {
+        profileData.firstName = args.record.firstName
+        profileData.lastName = args.record.lastName
         return {
-          record: somedata
+          record: profileData
         }
       }
     },
     Query: {
       version: () => packageInfo.version,
-      profile: () => somedata
+      profile: () => profileData
     }
   }
 })
