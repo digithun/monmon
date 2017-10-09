@@ -1,9 +1,15 @@
 import * as mongoose from 'mongoose'
 declare global {
+
+  type ReactionType = {
+    actionType: | 'smile' | 'laugh' | 'sad'
+    userId: mongoose.Types.ObjectId
+  }
   type CommentType = {
     threadId: mongoose.Types.ObjectId
     commentType: string
     message: string
+    reactions: ReactionType[]
     reply: mongoose.Types.ObjectId[]
   }
   interface IComment extends mongoose.Document, CommentType {
@@ -17,6 +23,20 @@ const commentSchema = new mongoose.Schema({
   commentType: {
     type: String,
     enum: ['TEXT'],
+  },
+  reactions: {
+    default: [],
+    type: new mongoose.Schema({
+      userId: {
+        type: mongoose.Types.ObjectId,
+        required: true
+      },
+      actionType: {
+        type: String,
+        enum: ['smile', 'laugh', 'sad'],
+        require: true
+      }
+    })
   },
   message: {
     type: String,
