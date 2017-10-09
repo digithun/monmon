@@ -2,10 +2,8 @@ require('dotenv').config({})
 import config from './config'
 import initApp from './server'
 import { Connection, Model } from 'mongoose'
-import * as Models from './models'
 import * as chalk from 'chalk'
 import * as DBConnection from './lib/db.connection'
-
 
 const logger = {
   log: (message) => {
@@ -18,11 +16,10 @@ async function run() {
     logger,
     config
   })
-  const models = await Models.createModelsFromMongooseConnection(__connection)
   const applicationContext: ApplicationContext = {
     config,
     logger,
-    models
+    __connection
   }
   const app = await initApp(applicationContext)
 

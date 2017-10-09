@@ -26,7 +26,7 @@ const commentSchema = new mongoose.Schema({
   },
   reactions: {
     default: [],
-    type: new mongoose.Schema({
+    type: {
       userId: {
         type: mongoose.Types.ObjectId,
         required: true
@@ -36,7 +36,7 @@ const commentSchema = new mongoose.Schema({
         enum: ['smile', 'laugh', 'sad'],
         require: true
       }
-    })
+    }
   },
   message: {
     type: String,

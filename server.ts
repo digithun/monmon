@@ -6,7 +6,7 @@ import { graphiqlExpress, graphqlExpress } from 'apollo-server-express'
 import * as next from 'next'
 import clientRoutes from './routes'
 
-import graphqlBuildedSchema from './graphql'
+import { createGraphQLSchema }  from './graphql'
 
 declare global {
   interface ApplicationLogger {
@@ -15,11 +15,11 @@ declare global {
   interface ApplicationContext {
     config: ApplicationConfig
     logger: ApplicationLogger
-    models: ApplicationModels
+    __connection: Connection
   }
 
   interface GraphqlContext extends ApplicationContext, express.Request {
-
+    models: ApplicationModels
   }
 }
 
@@ -29,13 +29,17 @@ export default async function init(context: ApplicationContext) {
   const clientRoutesHandler = clientRoutes.getRequestHandler(clientApp)
   server.use(bodyParser.json())
   server.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }))
+
+  const { schema, models }  = createGraphQLSchema(context)
   server.use('/graphql', graphqlExpress( (req) => ({
-    schema: graphqlBuildedSchema(context.models),
+    schema,
     context: {
       ...req,
-      ...context
+      ...context,
+      models
     }
   })))
+
   server.use(clientRoutesHandler)
   return {
     start: async () => {

@@ -2,6 +2,7 @@ import {
   makeExecutableSchema,
   mergeSchemas,
 } from 'graphql-tools';
+
 import createSchemaFromCompose from './compose-schema'
 
 const packageInfo = require('../package.json')
@@ -62,14 +63,26 @@ const simpleSchema = makeExecutableSchema({
     }
   }
 })
+let __models
+export function getModels(context: ApplicationContext) {
+  if (__models) {
+    return __models
+  } else {
+    // create model
+  }
+}
+export function createGraphQLSchema(context: ApplicationContext) {
 
-export default function createGraphQLSchema(models: ApplicationModels) {
-  const graphqlComposeSchema = createSchemaFromCompose(models)
-  const schemas = [simpleSchema, graphqlComposeSchema ]
-  return mergeSchemas({
-    schemas,
-    resolvers: (mergeInfo) => ({
+  const graphqlComposeSchema = createSchemaFromCompose(context.__connection)
+  const schemas = [simpleSchema, graphqlComposeSchema.schema]
+  __models = graphqlComposeSchema.models
+  return {
+    models: __models,
+    schema: mergeSchemas({
+      schemas,
+      resolvers: (mergeInfo) => ({
 
+      })
     })
-  })
+  }
 }

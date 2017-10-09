@@ -3,10 +3,16 @@ import { TypeComposer } from 'graphql-compose'
 import composeWithMongoose from 'graphql-compose-mongoose'
 
 import enchanceCreate from './create.resolver'
-export default (ThreadModel: Model<IThread>): TypeComposer  => {
+import schema from './thread.schema'
 
-  const typeComposer = composeWithMongoose(ThreadModel) as TypeComposer
-  enchanceCreate(typeComposer)
+export default {
+  schema,
+  createTypeComposer: (ThreadModel: Model<IThread>): TypeComposer => {
+    const typeComposer = composeWithMongoose(ThreadModel) as TypeComposer
+    enchanceCreate(typeComposer)
+    return typeComposer
+  },
+  addRelation: (typeComposers) => {
 
-  return typeComposer
+  }
 }
