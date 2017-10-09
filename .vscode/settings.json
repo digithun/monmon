@@ -10,6 +10,8 @@
       "**/.svn": true,
       "**/.hg": true,
       "**/CVS": true,
+      "**/.next": true,
+      "**/.db": true,
       "**/.DS_Store": true,
       "**/*.js.map": true,
       "**/*.js": true
