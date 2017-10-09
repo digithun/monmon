@@ -25,6 +25,13 @@ export default function withReduxApollo(WrappedComponent: React.ComponentClass) 
       } else {
         config = (window as any).config
       }
+      if ((WrappedComponent as any).getInitialProps) {
+        const WrappedComponentInitialProps = (WrappedComponent as any).getInitialProps(ctx)
+        return {
+          config,
+          ...WrappedComponentInitialProps
+        }
+      }
       return {
         config
       }
@@ -74,7 +81,9 @@ export default function withReduxApollo(WrappedComponent: React.ComponentClass) 
           }
         })
       }
-      const enhanceElement = React.createElement<any, any, any>(WrappedComponent, { })
+      const enhanceElement = React.createElement<any, any, any>(WrappedComponent, {
+        ...this.props
+      })
       const storeElement = React.createElement(Provider, {
         store
       }, enhanceElement)
