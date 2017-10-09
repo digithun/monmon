@@ -8,7 +8,9 @@ const hoistNonReactStatic = require('hoist-non-react-statics')
 import passthrough from 'react-passthrough'
 
 import initStore from './store.factory'
-
+declare global {
+  interface ApplicationApolloClient extends ApolloClient<Cache> { }
+}
 export default function withReduxApollo(WrappedComponent: React.ComponentClass) {
 
   class ConnectWithReduxAndApollo extends React.Component<{ client: ApolloClient<Cache>}, {}> {

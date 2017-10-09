@@ -17,7 +17,7 @@ function updateForm(context: ApplicationSagaContext) {
 
     const { apolloClient } = context
     const { fieldName, value } = action.payload
-    const profileQueryResult = apolloClient.readQuery<{ profile: UserProfile }>({
+    const profileQueryResult: any = apolloClient.readQuery<{ profile: UserProfile }>({
       query: Query
     })
     console.log(profileQueryResult)
@@ -50,9 +50,6 @@ function updateForm(context: ApplicationSagaContext) {
       })
 
       yield put({ type: 'form/updated' })
-      console.log(apolloClient.readQuery<{ profile: UserProfile }>({
-        query: Query
-      }).profile)
     } catch (e) {
       console.error(e)
     }

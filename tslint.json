@@ -16,6 +16,7 @@
       "semicolon": [false],
       "trailing-comma": [false],
       "ordered-imports": false,
+      "no-empty-interface": false,
       "member-ordering": [true, { "order": "fields-first" }],
       "variable-name": false,
       "interface-name": ["never-prefix"],

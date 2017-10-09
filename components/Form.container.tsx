@@ -28,7 +28,7 @@ export default compose(
     }
   })),
   withApollo,
-  graphql<{ profile: UserProfile }, {}>(Query, {
+  graphql<{ profile: UserProfile }, { client: ApplicationApolloClient }>(Query, {
     options: {
       fetchPolicy: 'cache-and-network'
     },
@@ -39,7 +39,7 @@ export default compose(
         // data from writeQuery outside HOC wont update
         // this workaround will be just for temporary
         return ({
-          value: ownProps.client.readQuery({query: Query}).profile
+          value: (ownProps.client.readQuery({query: Query}) as any).profile
         })
       }
       return ({ value: data.profile || { firstName: '', lastName: '' } })

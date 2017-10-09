@@ -1,10 +1,12 @@
 import * as mongoose from 'mongoose'
 declare global {
-  interface IComment extends mongoose.Document {
+  type CommentType = {
     threadId: mongoose.Types.ObjectId
     commentType: string
     message: string
     reply: mongoose.Types.ObjectId[]
+  }
+  interface IComment extends mongoose.Document, CommentType {
   }
 }
 const commentSchema = new mongoose.Schema({
