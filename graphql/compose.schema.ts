@@ -3,7 +3,17 @@ import { GQC, TypeComposer } from 'graphql-compose'
 import * as mongoose from 'mongoose'
 import thread from './Thread'
 import comment from './Comment'
+
 declare global {
+  interface ApplicationGraphqlStrategy<T extends mongoose.Document> {
+    schema: mongoose.Schema
+    createTypeComposer: (Model: mongoose.Model<T>) => TypeComposer
+    createGraphQLRelation: (TypeComposers: TypeComposer[]) => void
+  }
+  /**
+   * dont foret to add models to Interface
+   * after you create new model
+   */
   interface ApplicationModels {
     Thread: mongoose.Model<IThread>
     Comment: mongoose.Model<IComment>
