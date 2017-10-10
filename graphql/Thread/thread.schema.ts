@@ -5,7 +5,7 @@ declare global {
     contentId: mongoose.Types.ObjectId
     contentPrefix: string
   }
-  interface ThreadDocument extends mongoose.Document, GBThreadType { }
+  interface GQThreadDocument extends mongoose.Document, GBThreadType { }
 }
 const threadSchema = new mongoose.Schema({
   appId: {

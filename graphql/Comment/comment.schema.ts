@@ -13,7 +13,7 @@ declare global {
     reply: mongoose.Types.ObjectId[]
     _id: any
   }
-  interface CommentDocument extends mongoose.Document, GBCommentType {
+  interface GQCommentDocument extends mongoose.Document, GBCommentType {
   }
 }
 const commentSchema = new mongoose.Schema({

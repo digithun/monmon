@@ -15,4 +15,4 @@ export default {
   createGraphQLRelation: (typeComposers) => {
     // implement Relation
   }
-} as ApplicationGraphqlStrategy<ThreadDocument>
+} as GQTypeComposerStrategy<GQThreadDocument>

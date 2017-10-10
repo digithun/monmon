@@ -6,7 +6,7 @@ import composeSchema from '../../compose.schema'
 
 describe('Thread resolver test', () => {
   let connection: Connection;
-  let models: ApplicationModels;
+  let models: GQApplicationModels;
   beforeAll(async () => {
     connection = await initConnection({
       config,

@@ -9,4 +9,4 @@ export default {
     const typeComposer = composeWithMongoose(CommentModel) as TypeComposer
     return typeComposer
   }
-} as ApplicationGraphqlStrategy<CommentDocument>
+} as GQTypeComposerStrategy<GQCommentDocument>

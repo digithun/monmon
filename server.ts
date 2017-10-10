@@ -18,7 +18,7 @@ declare global {
   }
 
   interface GQResolverContext extends SVContext, express.Request {
-    models: ApplicationModels
+    models: GQApplicationModels
   }
 }
 

@@ -8,7 +8,7 @@ declare global {
   /**
    * Every Graphql-compose Model strategy should implement this type
    */
-  interface ApplicationGraphqlStrategy<T extends mongoose.Document> {
+  interface GQTypeComposerStrategy<T extends mongoose.Document> {
     schema: mongoose.Schema
     createTypeComposer: (Model: mongoose.Model<T>) => TypeComposer
     createGraphQLRelation?: (TypeComposers: TypeComposer[]) => void
@@ -17,16 +17,16 @@ declare global {
    * dont foret to add models to Interface
    * after you create new model
    */
-  interface ApplicationModels {
-    Thread: mongoose.Model<ThreadDocument>
-    Comment: mongoose.Model<CommentDocument>
+  interface GQApplicationModels {
+    Thread: mongoose.Model<GQThreadDocument>
+    Comment: mongoose.Model<GQCommentDocument>
   }
 }
 
 export default function createSchema(connection: mongoose.Connection) {
   const models = {
-    Thread: connection.model<ThreadDocument>('Thread', thread.schema),
-    Comment: connection.model<CommentDocument>('Comment', comment.schema),
+    Thread: connection.model<GQThreadDocument>('Thread', thread.schema),
+    Comment: connection.model<GQCommentDocument>('Comment', comment.schema),
   }
   const typeComposers = {
     Thread: thread.createTypeComposer(models.Thread),
