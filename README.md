@@ -1,5 +1,12 @@
-
-
+# monitor-monster
+```
+ _____         _____         
+|     |___ ___|     |___ ___ 
+| | | | . |   | | | | . |   |
+|_|_|_|___|_|_|_|_|_|___|_|_|
+                             
+```
+A beast that will keep an eyes on Monitoring, Logging, and will you keep alarm when condition has been met.
 
 ## Run development
 ```
