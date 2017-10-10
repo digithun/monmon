@@ -11,18 +11,18 @@ declare global {
   interface ApplicationLogger {
     log: (message: string) => void
   }
-  interface ApplicationContext {
+  interface SVContext {
     config: ApplicationConfig
     logger: ApplicationLogger
     __connection: Connection
   }
 
-  interface GraphqlContext extends ApplicationContext, express.Request {
+  interface GQResolverContext extends SVContext, express.Request {
     models: ApplicationModels
   }
 }
 
-export default async function init(context: ApplicationContext) {
+export default async function init(context: SVContext) {
   const server = express()
   const clientApp = next({ dev: context.config.dev })
   const clientRoutesHandler = clientRoutes.getRequestHandler(clientApp)

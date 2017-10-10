@@ -16,12 +16,12 @@ async function run() {
     logger,
     config
   })
-  const applicationContext: ApplicationContext = {
+  const SVContext: SVContext = {
     config,
     logger,
     __connection
   }
-  const app = await initApp(applicationContext)
+  const app = await initApp(SVContext)
 
   async function clearConnection() {
     logger.log(chalk.green('closing app...'))

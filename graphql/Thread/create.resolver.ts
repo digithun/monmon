@@ -2,7 +2,7 @@ import { TypeComposer } from 'graphql-compose'
 
 export function createThreadWrapResolver(next) {
   return async (rp) => {
-    const context: GraphqlContext = rp.context
+    const context: GQResolverContext = rp.context
     const result = await next(rp)
     if (!result) {
       context.logger.log('Thread: Create new thread...')

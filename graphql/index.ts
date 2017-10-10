@@ -4,7 +4,7 @@ import createSchemaFromCompose from './compose.schema'
 import simpleSchema from './simple.schema'
 
 let __models
-export function getModels(context: ApplicationContext) {
+export function getModels(context: SVContext) {
   if (__models) {
     return __models
   } else {
@@ -12,7 +12,7 @@ export function getModels(context: ApplicationContext) {
     throw new Error('Unimplemented: index.ts/getModels')
   }
 }
-export function createGraphQLSchema(context: ApplicationContext) {
+export function createGraphQLSchema(context: SVContext) {
 
   const graphqlComposeSchema = createSchemaFromCompose(context.__connection)
 

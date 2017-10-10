@@ -1,11 +1,11 @@
 import * as React from 'react'
 
-interface ComponentInputPropTypes {
+interface UIComponentCommentInputPropTypes {
   onChange: (fieldName: string, value: string) => void
   value: CommentType
 }
 
-export default (props: ComponentInputPropTypes) => {
+export default (props: UIComponentCommentInputPropTypes) => {
 
   return (<div />)
 }
