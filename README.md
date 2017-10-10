@@ -7,7 +7,7 @@
 npm i
 
 # Compile typescript and watch
-npm watch
+npm run watch
 
 # Run MongoDB
 npm run up-dev
