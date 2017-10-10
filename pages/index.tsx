@@ -1,7 +1,6 @@
 import * as React from 'react'
 import Form from '../components/Form.container'
 import styledComponent from 'styled-components'
-// const styled = require('styled-components').default
 const styled = styledComponent
 
 const Input = styled.input`
@@ -15,3 +14,5 @@ export default () => {
     <Input />
   )
 }
+
+// const styled = require('styled-components').default
