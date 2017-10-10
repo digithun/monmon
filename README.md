@@ -14,7 +14,7 @@ A beast that will keep an eyes on Monitoring, Logging, and will you keep alarm w
 npm i
 
 # Compile typescript and watch
-npm watch
+npm run watch
 
 # Run MongoDB
 npm run up-dev

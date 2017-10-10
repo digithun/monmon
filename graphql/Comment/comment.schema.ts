@@ -7,20 +7,18 @@ declare global {
   }
   type GBCommentType = {
     threadId: mongoose.Types.ObjectId
+    slug: string
     GBCommentType: string
     message: string
     reactions: GBReactionType[]
-    reply: mongoose.Types.ObjectId[]
     _id: any
   }
   interface GQCommentDocument extends mongoose.Document, GBCommentType {
   }
 }
 const commentSchema = new mongoose.Schema({
-  threadId: {
-    type: mongoose.Schema.Types.ObjectId,
-    unique: true
-  },
+  threadId: { type: mongoose.Types.ObjectId },
+  slug: { type: String },
   GBCommentType: {
     type: String,
     enum: ['TEXT'],
@@ -49,9 +47,6 @@ const commentSchema = new mongoose.Schema({
       msg: 'comment, should less than 300 length and more than 0'
     }
   },
-  reply: [{
-    type: mongoose.Schema.Types.ObjectId
-  }]
 })
 
 export default commentSchema

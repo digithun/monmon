@@ -4,25 +4,16 @@ import { ServerStyleSheet } from 'styled-components'
 
 export default class PageDocument extends Document {
   public props: {
-    styleTags: any;
+    styleTags: any
   }
   public static getInitialProps({ renderPage }) {
     const sheet = new ServerStyleSheet()
     const page = renderPage((App) => (props) => sheet.collectStyles(<App {...props} />))
-    let styleTags = sheet.getStyleElement()
-    if (typeof global !== 'undefined') {
-      if (global.styles) {
-        console.log('use cache')
-        console.log(styles)
-        styleTags = global.styles
-      } else {
-        console.log('render new')
-        console.log(styleTags)
-        global.styles = styleTags
-      }
-    }
+    const styleTags = sheet.getStyleElement()
+
     return { ...page, styleTags }
   }
+
   public render() {
     return (
       <html>
