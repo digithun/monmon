@@ -8,6 +8,7 @@ declare global {
   type GBCommentType = {
     threadId: mongoose.Types.ObjectId
     slug: string
+    fullSlug: string
     GBCommentType: string
     message: string
     reactions: GBReactionType[]
@@ -19,6 +20,7 @@ declare global {
 const commentSchema = new mongoose.Schema({
   threadId: { type: mongoose.Schema.Types.ObjectId },
   slug: { type: String },
+  fullSlug: { type: String },
   GBCommentType: {
     type: String,
     enum: ['TEXT'],
