@@ -18,15 +18,15 @@ declare global {
    * after you create new model
    */
   interface ApplicationModels {
-    Thread: mongoose.Model<IThread>
-    Comment: mongoose.Model<IComment>
+    Thread: mongoose.Model<ThreadDocument>
+    Comment: mongoose.Model<CommentDocument>
   }
 }
 
 export default function createSchema(connection: mongoose.Connection) {
   const models = {
-    Thread: connection.model<IThread>('Thread', thread.schema),
-    Comment: connection.model<IComment>('Comment', comment.schema),
+    Thread: connection.model<ThreadDocument>('Thread', thread.schema),
+    Comment: connection.model<CommentDocument>('Comment', comment.schema),
   }
   const typeComposers = {
     Thread: thread.createTypeComposer(models.Thread),

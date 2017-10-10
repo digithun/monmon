@@ -11,8 +11,9 @@ declare global {
     message: string
     reactions: ReactionType[]
     reply: mongoose.Types.ObjectId[]
+    _id: any
   }
-  interface IComment extends mongoose.Document, CommentType {
+  interface CommentDocument extends mongoose.Document, CommentType {
   }
 }
 const commentSchema = new mongoose.Schema({

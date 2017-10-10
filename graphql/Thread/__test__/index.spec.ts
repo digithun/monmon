@@ -1,8 +1,8 @@
 import { Connection, Types } from 'mongoose'
 import { initConnection } from '../../../lib/db.connection'
 import config from '../../../config'
-import { createModelsFromMongooseConnection } from '../../../models'
 import { createThreadWrapResolver } from '../create.resolver'
+import composeSchema from '../../compose.schema'
 
 describe('Thread resolver test', () => {
   let connection: Connection;
@@ -12,7 +12,7 @@ describe('Thread resolver test', () => {
       config,
       logger: console
     })
-    models = createModelsFromMongooseConnection(connection)
+    models = composeSchema(connection).models
   })
   afterAll(async () => {
     await connection.close()
