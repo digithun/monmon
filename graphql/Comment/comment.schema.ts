@@ -17,7 +17,7 @@ declare global {
   }
 }
 const commentSchema = new mongoose.Schema({
-  threadId: { type: mongoose.Types.ObjectId },
+  threadId: { type: mongoose.Schema.Types.ObjectId },
   slug: { type: String },
   GBCommentType: {
     type: String,
@@ -27,7 +27,7 @@ const commentSchema = new mongoose.Schema({
     default: [],
     type: {
       userId: {
-        type: mongoose.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         required: true
       },
       actionType: {
