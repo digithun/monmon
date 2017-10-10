@@ -5,8 +5,7 @@ import { Connection, Model } from 'mongoose'
 import { graphiqlExpress, graphqlExpress } from 'apollo-server-express'
 import * as next from 'next'
 import clientRoutes from './routes'
-
-import { createGraphQLSchema }  from './graphql'
+import { createGraphQLSchema } from './graphql'
 
 declare global {
   interface ApplicationLogger {

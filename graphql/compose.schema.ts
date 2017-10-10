@@ -22,13 +22,11 @@ declare global {
     Comment: mongoose.Model<IComment>
   }
 }
-export default function createSchema(connection: mongoose.Connection): {
-  schema: any
-  models: ApplicationModels
-} {
+
+export default function createSchema(connection: mongoose.Connection) {
   const models = {
     Thread: connection.model<IThread>('Thread', thread.schema),
-    Comment: connection.model<IComment>('Comment', comment.schema)
+    Comment: connection.model<IComment>('Comment', comment.schema),
   }
   const typeComposers = {
     Thread: thread.createTypeComposer(models.Thread),

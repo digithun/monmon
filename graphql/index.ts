@@ -15,6 +15,7 @@ export function getModels(context: ApplicationContext) {
 export function createGraphQLSchema(context: ApplicationContext) {
 
   const graphqlComposeSchema = createSchemaFromCompose(context.__connection)
+
   const schemas = [simpleSchema, graphqlComposeSchema.schema]
   __models = graphqlComposeSchema.models
   return {
