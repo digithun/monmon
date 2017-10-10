@@ -1,4 +1,5 @@
 import * as React from 'react'
+import Tree from '../components/Tree'
 import Form from '../components/Form.container'
 import styledComponent from 'styled-components'
 const styled = styledComponent
@@ -11,7 +12,7 @@ export default () => {
 
   console.log('render')
   return (
-    <Input />
+    < Tree />
   )
 }
 

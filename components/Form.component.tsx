@@ -1,15 +1,16 @@
 import * as React from 'react'
 import { withProps } from 'recompose'
 import { InputTextMultiline } from '../components/common/Input'
+import Tree from './Tree'
 
-const InputField = withProps<{ onChange: any, value: any}, { value: string, fieldName: string, onChange: (fieldName: string, value: string) => void }>(
+const InputField = withProps<{ onChange: any, value: any }, { value: string, fieldName: string, onChange: (fieldName: string, value: string) => void }>(
   (props) => ({
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
       props.onChange(props.fieldName, e.target.value)
     },
     value: props.value
   })
-)(({ onChange, value }) => React.createElement('input', { value, onChange}))
+)(({ onChange, value }) => React.createElement('input', { value, onChange }))
 
 interface FormPropTypes {
   value: UserProfile
@@ -22,6 +23,8 @@ export default class Form extends React.Component<FormPropTypes, {}> {
     const { value, onChange } = this.props
     return (
       <div>
+        <Tree />
+        <p>ok</p>
         {'firstName' + value.firstName}
         <InputTextMultiline />
         {<InputField value={value.firstName} fieldName={'firstName'} onChange={this.props.onChange} />}
