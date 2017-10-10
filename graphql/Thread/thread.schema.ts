@@ -1,11 +1,11 @@
 import * as mongoose from 'mongoose'
 declare global {
-  type ThreadType = {
+  type GBThreadType = {
     appId: string
     contentId: mongoose.Types.ObjectId
     contentPrefix: string
   }
-  interface ThreadDocument extends mongoose.Document, ThreadType { }
+  interface ThreadDocument extends mongoose.Document, GBThreadType { }
 }
 const threadSchema = new mongoose.Schema({
   appId: {
