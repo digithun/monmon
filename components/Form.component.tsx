@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { withProps } from 'recompose'
+import { InputTextMultiline } from '../components/common/Input'
 
 const InputField = withProps<{ onChange: any, value: any}, { value: string, fieldName: string, onChange: (fieldName: string, value: string) => void }>(
   (props) => ({
@@ -22,7 +23,7 @@ export default class Form extends React.Component<FormPropTypes, {}> {
     return (
       <div>
         {'firstName' + value.firstName}
-        {this.props.loading ? 'loading' : 'done'}
+        <InputTextMultiline />
         {<InputField value={value.firstName} fieldName={'firstName'} onChange={this.props.onChange} />}
         {<InputField value={value.lastName} fieldName={'firstName'} onChange={this.props.onChange} />}
       </div>

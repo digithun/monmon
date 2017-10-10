@@ -1,7 +1,7 @@
 import { configure } from '@storybook/react';
 
 function loadStories() {
-  require('../components/.stories/index.js');
+  require('../components/stories');
   // You can require as many stories as you need.
 }
 
