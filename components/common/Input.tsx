@@ -1,6 +1,7 @@
 import * as React from 'react'
-import styled from 'styled-components'
 import { compose, withProps } from 'recompose'
+const styled = require('styled-components').default
 
-const InputTextMultiline = styled.textarea([` width: 100px; `])
-export default InputTextMultiline
+export const InputTextMultiline = styled.textarea`
+  width: 100px;
+`
